@@ -1,7 +1,7 @@
 from hashlib import sha256
 from datetime import datetime
 
-
+# create "block" class
 class Block:
     def __init__(self, index, timestamp, data, previous_hash):
         self.index = index
@@ -16,7 +16,7 @@ class Block:
                     self.data.encode() + self.previous_hash.encode())
         return sha.hexdigest()
 
-
+# create block, from which we'll start
 def create_primary_block():
     return Block(0, datetime.now(), "Hello, I'm Primary block", "0")
 
@@ -32,7 +32,7 @@ def create_next_block(last_block):
 blockchain = [create_primary_block()]
 previous_block = blockchain[0]
 blockchain_size = 100
-for transaction in range(0, blockchain_size):
+for block in range(0, blockchain_size):
     block_to_add = create_next_block(previous_block)
     blockchain.append(block_to_add)
     previous_block = block_to_add
